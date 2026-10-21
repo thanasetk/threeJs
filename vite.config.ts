@@ -4,7 +4,9 @@ import react from "@vitejs/plugin-react";
 
 // The ThreeUI source lives in src/shaders, so the package import names from the
 // configured usage resolve to these local files instead of an npm package.
+// The Pages workflow sets BASE_PATH=/threeJs/; local dev stays at /.
 export default defineConfig({
+  base: process.env.BASE_PATH ?? "/",
   plugins: [react()],
   resolve: {
     alias: [

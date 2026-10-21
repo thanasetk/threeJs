@@ -5,9 +5,11 @@ export type DarkSoulsHoloCardVariant = (typeof DARK_SOULS_HOLO_CARD_VARIANTS)[nu
 
 /* `ashen-one` is the packaged document, untouched. `cindermane` is the owner-supplied
    sibling document on the same engine, served as its own file. */
+/* Prefixed with Vite's base so the documents resolve when the app is served
+   from a sub-path (GitHub Pages serves this repo under /threeJs/). */
 const DARK_SOULS_DOCUMENTS: Record<DarkSoulsHoloCardVariant, string> = {
-  "ashen-one": "/landing-pages/dark-souls-holo-card.html",
-  cindermane: "/landing-pages/dark-souls-holo-card-cindermane.html",
+  "ashen-one": `${import.meta.env.BASE_URL}landing-pages/dark-souls-holo-card.html`,
+  cindermane: `${import.meta.env.BASE_URL}landing-pages/dark-souls-holo-card-cindermane.html`,
 };
 
 const DARK_SOULS_TITLES: Record<DarkSoulsHoloCardVariant, string> = {
