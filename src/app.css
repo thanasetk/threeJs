@@ -32,6 +32,41 @@ a { color: var(--accent-2); }
   pointer-events: none;
 }
 .bg3d canvas { display: block; width: 100%; height: 100%; }
+/* Keyboard focus ring for the interactive globe. */
+.bg3d:focus { outline: none; }
+.bg3d:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: -4px;
+  border-radius: 12px;
+}
+
+/* Floating detail label for the highlighted skill. */
+.skill-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(12, 14, 34, 0.92);
+  border: 1px solid rgba(120, 220, 255, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  color: var(--text);
+  white-space: nowrap;
+  opacity: 0;
+  transform-origin: bottom center;
+  transition: opacity 160ms ease;
+}
+.skill-tip.on { opacity: 1; }
+.skill-tip strong { font-size: 0.92rem; }
+.skill-tip span { font-size: 0.78rem; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) {
+  .skill-tip { transition: none; }
+}
 /* Darkens the left side so orbiting words never fight the hero text. */
 .bg3d::after {
   content: "";

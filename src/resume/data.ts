@@ -95,11 +95,25 @@ export const skillGroups: { label: string; items: string[] }[] = [
   { label: "Methodology", items: ["Agile", "Scrum", "Multi-tenant product customization", "Release/rollback discipline"] },
 ];
 
-// Words that orbit the 3D core.
-export const orbitWords = [
-  "Java", "Spring Boot", "React", "TypeScript", "Docker", "Kubernetes",
-  "PostgreSQL", "Oracle", "Redis", "AngularJS", "Node.js", "Claude Code",
+// Skills that orbit the 3D core. `detail` shows in a tooltip on hover/tap.
+export type OrbitSkill = { name: string; detail: string };
+export const orbitSkills: OrbitSkill[] = [
+  { name: "Java", detail: "7+ yrs · Spring, enterprise apps" },
+  { name: "Spring Boot", detail: "6+ yrs · REST APIs & services" },
+  { name: "React", detail: "React 18 · this site" },
+  { name: "TypeScript", detail: "Daily · typed frontends" },
+  { name: "Docker", detail: "Compose · build & deploy" },
+  { name: "Kubernetes", detail: "Container orchestration" },
+  { name: "PostgreSQL", detail: "7+ yrs · schema & tuning" },
+  { name: "Oracle", detail: "Toyota Daihatsu systems" },
+  { name: "Redis", detail: "Caching & sessions" },
+  { name: "AngularJS", detail: "Low-code platform modules" },
+  { name: "Node.js", detail: "Services & tooling" },
+  { name: "Claude Code", detail: "Custom skills · agentic dev" },
 ];
+
+// Plain word list kept for any caller that only needs the labels.
+export const orbitWords = orbitSkills.map((s) => s.name);
 
 export const education = {
   degree: "Bachelor of Science in Computer Science",
