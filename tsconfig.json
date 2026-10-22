@@ -8,11 +8,7 @@
     "strict": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "isolatedModules": true,
-    "baseUrl": ".",
-    "paths": {
-      "@designcodeio/threeui": ["src/shaders/index.ts"]
-    }
+    "isolatedModules": true
   },
   "include": ["src"]
 }
