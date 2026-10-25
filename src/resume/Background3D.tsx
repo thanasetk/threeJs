@@ -200,15 +200,24 @@ export function Background3D() {
       return raycaster.intersectObjects([grab, ...words.map((w) => w.sprite)], false).length > 0;
     };
 
+    // The globe sits behind the content as you scroll, so only presses on empty
+    // background may grab it; text, panels and links keep scroll and selection.
+    const onBackground = (e: PointerEvent) => {
+      const el = e.target as Element;
+      return el === document.body || el.matches(".page, .hero");
+    };
+
     const onPointerDown = (e: PointerEvent) => {
       setNdc(e.clientX, e.clientY);
-      if (!overGlobe()) return; // leave page scroll / clicks untouched
+      if (!onBackground(e) || !overGlobe()) return; // leave page scroll / clicks untouched
       e.preventDefault(); // don't start a text selection when grabbing the globe
       dragging = true;
       moved = 0;
       lastX = e.clientX;
       lastY = e.clientY;
       activeType = e.pointerType;
+      // Non-passive only for the length of the drag, so normal scrolling never waits on JS.
+      window.addEventListener("touchmove", onTouchMove, { passive: false });
       document.body.style.cursor = "grabbing";
       document.body.style.userSelect = "none";
     };
@@ -232,7 +241,12 @@ export function Background3D() {
       }
 
       if (e.pointerType === "mouse") {
-        // Hover highlight (mouse only — touch uses tap).
+        // Hover highlight (mouse only — touch uses tap); none over content.
+        if (!onBackground(e)) {
+          document.body.style.cursor = "";
+          setHot(-1);
+          return;
+        }
         const idx = pick();
         document.body.style.cursor = idx >= 0 || overGlobe() ? "grab" : "";
         setHot(idx);
@@ -242,6 +256,7 @@ export function Background3D() {
     const onPointerUp = (e: PointerEvent) => {
       if (!dragging) return;
       dragging = false;
+      window.removeEventListener("touchmove", onTouchMove);
       document.body.style.cursor = "";
       document.body.style.userSelect = "";
       // A tap that barely moved toggles the skill under it (handy on touch).
@@ -311,7 +326,6 @@ export function Background3D() {
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     window.addEventListener("pointerup", onPointerUp);
     window.addEventListener("pointercancel", onPointerUp);
-    window.addEventListener("touchmove", onTouchMove, { passive: false });
     host.addEventListener("keydown", onKeyDown);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);

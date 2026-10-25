@@ -99,12 +99,12 @@ export const skillGroups: { label: string; items: string[] }[] = [
 export type OrbitSkill = { name: string; detail: string };
 export const orbitSkills: OrbitSkill[] = [
   { name: "Java", detail: "7+ yrs · Spring, enterprise apps" },
-  { name: "Spring Boot", detail: "6+ yrs · REST APIs & services" },
+  { name: "Spring Boot", detail: "4+ yrs · REST APIs & services" },
   { name: "React", detail: "React 18 · this site" },
-  { name: "TypeScript", detail: "Daily · typed frontends" },
+  { name: "TypeScript", detail: "Personal projects" },
   { name: "Docker", detail: "Compose · build & deploy" },
   { name: "Kubernetes", detail: "Container orchestration" },
-  { name: "PostgreSQL", detail: "7+ yrs · schema & tuning" },
+  { name: "PostgreSQL", detail: "5+ yrs · schema & tuning" },
   { name: "Oracle", detail: "Toyota Daihatsu systems" },
   { name: "Redis", detail: "Caching & sessions" },
   { name: "AngularJS", detail: "Low-code platform modules" },
